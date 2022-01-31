@@ -5,10 +5,23 @@
  * - a gradle build is a program
 */
 
+task hello
+task world
 task helloWorld
 
-helloWorld {
+world {
+    dependsOn << hello
     doLast {
-        println "Hello World"
+        println "World"
     }
+}
+
+hello {
+    doLast {
+        println "Hello, "
+    }
+}
+
+helloWorld {
+    dependsOn << [ world, hello ]
 }
