@@ -1,0 +1,14 @@
+/*
+ * - a task is an object
+ *   - a task has an API
+ * - a task has a list of activity
+ * - a gradle build is a program
+*/
+
+task helloWorld
+
+helloWorld {
+    doLast {
+        println "Hello World"
+    }
+}
