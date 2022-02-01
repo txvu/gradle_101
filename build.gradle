@@ -2,13 +2,14 @@
  * - a task is an object
  *   - a task has an API
  * - a task has a list of activity
+ * - Tasks form a Directed Acyclic Graph
  * - a gradle build is a program
 */
 
 task hello
 task world
-task helloWorld
 
+// $ gradle -q world
 world {
     dependsOn << hello
     doLast {
@@ -16,12 +17,35 @@ world {
     }
 }
 
+// $ gradle hello
 hello {
     doLast {
         println "Hello, "
     }
 }
 
-helloWorld {
-    dependsOn << [ world, hello ]
+// $ gradle -q hW
+// $ gradle -q helloWorld
+task helloWorld {
+    dependsOn << [ world, hello ] //Only run each task once
 }
+
+def whatsUp() {
+    println "yo yo yo"
+}
+
+/*
+ * COmpile the Java
+ * Run tests
+ * Copy static resources
+ * Format test result
+ * Build a JAR
+ * top-level task that does all of these things
+ */
+
+ apply plugin: 'java'
+
+ task isaac(type: JavaExec) {
+     main = 'org/gradle/poetry/Poetry'
+     classpath = sourceSets.main.runtimeClasspath
+ }
