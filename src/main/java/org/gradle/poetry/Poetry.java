@@ -1,6 +1,7 @@
 package org.gradle.poetry;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.codec.binary.Base64;
 
 
 public class Poetry {
@@ -14,8 +15,13 @@ public class Poetry {
 
     public void emit(List<String> lines) {
         for (String line: lines) {
-            System.out.println(line);
+            System.out.println(encode(line));
         }
+    }
+
+    public String encode(String text) {
+        Base64 codec = new Base64();
+        return new String(codec.encode(text.getBytes()));
     }
 
     public static void main(String[] args) {

@@ -45,6 +45,14 @@ def whatsUp() {
 
  apply plugin: 'java'
 
+ repositories {
+     mavenCentral()
+ }
+
+ dependencies {
+     implementation 'commons-codec:commons-codec:1.6'
+ }
+
  task isaac(type: JavaExec) {
      main = 'org/gradle/poetry/Poetry'
      classpath = sourceSets.main.runtimeClasspath
